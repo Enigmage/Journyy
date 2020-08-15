@@ -2,4 +2,7 @@
 
 * [x] Test content model
 * [x] Render submitted content on the Dashboard.
-* [x] Refactor UI
+* [] Refactor UI
+* [] Scale for multiple Users
+* [] Rewrite UI in React
+
