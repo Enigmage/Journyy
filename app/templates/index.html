@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<br>
+<div class="container">
+    {% for dat in data %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{dat.title}}</h5>
+            <p class="card-text">{{dat.timestamp}}</p>
+            <a class="btn btn-primary" href="/read/{{dat.id}}">Read</a>
+            <a class="btn btn-danger" href="/delete/{{dat.id}}">Delete</a>
+            <a class="btn btn-info" href="/putc/{{dat.id}}">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+

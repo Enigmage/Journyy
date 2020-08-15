@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<br>
+<div class="container">
+    {% filter markdown %}
+        {{disp.content}}
+    {% endfilter %}
+</div>
+{% endblock %}
+
+
