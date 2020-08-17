@@ -4,6 +4,4 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class markdownform(FlaskForm):
-    title = StringField('title', validators=[DataRequired(), Length(min=2, max=80)])
-    pagedown = PageDownField('Post', validators=[DataRequired()])
     submit = SubmitField('Post')
