@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 flask = "*"
 python-dotenv = "*"
-flask-pagedown = "*"
 flask-markdown = "*"
 flask-wtf = "*"
 flask-sqlalchemy = "*"
