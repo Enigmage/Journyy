@@ -1,7 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_pagedown.fields import PageDownField
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import SubmitField
 
 class markdownform(FlaskForm):
     submit = SubmitField('Post')

@@ -19,7 +19,7 @@ def post():
     return render_template('post.html', form=form)
 
 @app.route('/test', methods = ['GET', 'POST'])
-def test():
+def test_send():
     title = request.json['title']
     content = request.json['content']
     try:
@@ -32,7 +32,7 @@ def test():
     
 
 @app.route('/fetch')
-def fetc():
+def test_fetch():
     x = Content.query.all()
     y = content_schema.dump(x)
     return jsonify(y)
@@ -56,7 +56,7 @@ def read(id):
         disp = Content.query.get_or_404(id)
         return render_template('read.html', disp = disp)
     except:
-        return 'Post cant be fetched'
+        return 'Post cannot be fetched'
 
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -66,13 +66,13 @@ def delete(id):
         db.session.commit()
         return redirect('/')
     except:
-        return 'Post cant be deleted'
+        return 'Post cannot be deleted'
 
-@app.route('/putc/<int:id>')
-def putc(id):
+@app.route('/edit/<int:id>')
+def edit(id):
     try:
         form = markdownform()
         change = Content.query.get_or_404(id)
         return render_template('change.html', change = change, form = form)
     except:
-        return 'Post cant be fetched for editing'
+        return 'Post cannot be fetched for editing'

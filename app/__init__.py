@@ -1,6 +1,5 @@
 from flask import Flask, url_for
 from config import Config
-from flask_pagedown import PageDown
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flaskext.markdown import Markdown
@@ -8,7 +7,6 @@ from flask_simplemde import SimpleMDE
 
 
 app = Flask(__name__)
-pagedown = PageDown(app)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 ma = Marshmallow(app) # Serializer
