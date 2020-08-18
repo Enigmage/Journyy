@@ -4,14 +4,14 @@
 <br>
 <br>
 <div class="container">
-    {% for dat in data %}
+    {% for post in posts %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{dat.title}}</h5>
-            <p class="card-text">{{dat.timestamp}}</p>
-            <a class="btn btn-primary" href="/read/{{dat.id}}">Read</a>
-            <a class="btn btn-danger" href="/delete/{{dat.id}}">Delete</a>
-            <a class="btn btn-info" href="/putc/{{dat.id}}">Edit</a>
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text">{{post.timestamp}}</p>
+            <a class="btn btn-primary" href="/read/{{post.id}}">Read</a>
+            <a class="btn btn-danger" href="/delete/{{post.id}}">Delete</a>
+            <a class="btn btn-info" href="/edit/{{post.id}}">Edit</a>
         </div>
     </div>
     <br>

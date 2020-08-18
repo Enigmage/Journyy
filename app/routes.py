@@ -8,8 +8,8 @@ content_schema = ContentSchema(many=True)
 @app.route('/')
 def index():
     try:
-        data = Content.query.all()
-        return render_template('index.html', data = data )
+        posts = Content.query.all()
+        return render_template('index.html', posts = posts )
     except:
         return 'Data could not be queried !!'
 
@@ -18,6 +18,7 @@ def post():
     form = markdownform()
     return render_template('post.html', form=form)
 
+#---------------------------------API TEST-------------------------------------
 @app.route('/test', methods = ['GET', 'POST'])
 def test_send():
     title = request.json['title']
@@ -29,40 +30,39 @@ def test_send():
         return 'Success!'
     except:
         return 'There was some problem!!'
-    
 
 @app.route('/fetch')
 def test_fetch():
     x = Content.query.all()
     y = content_schema.dump(x)
     return jsonify(y)
+#------------------------------------------------------------------------------
 
-@app.route('/submit', methods = ['GET', 'POST'])
+@app.route('/submit', methods = ['POST'])
 def submit():
-    if request.method == 'POST':
-        try:
-            title = request.form['title']
-            content = request.form['pagedown']
-            sub  = Content(title = title, content = content)
-            db.session.add(sub)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was some problem !!'
+    try:
+        title = request.form['title']
+        content = request.form['pagedown']
+        sub  = Content(title = title, content = content)
+        db.session.add(sub)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was some problem submitting your post !!!'
 
 @app.route('/read/<int:id>')
 def read(id):
     try:
-        disp = Content.query.get_or_404(id)
-        return render_template('read.html', disp = disp)
+        read_post = Content.query.get_or_404(id)
+        return render_template('read.html', disp = read_post)
     except:
         return 'Post cannot be fetched'
 
 @app.route('/delete/<int:id>')
 def delete(id):
     try:
-        disp = Content.query.get_or_404(id)
-        db.session.delete(disp)
+        delete_this = Content.query.get_or_404(id)
+        db.session.delete(delete_this)
         db.session.commit()
         return redirect('/')
     except:
@@ -76,3 +76,18 @@ def edit(id):
         return render_template('change.html', change = change, form = form)
     except:
         return 'Post cannot be fetched for editing'
+
+@app.route('/editview/<int:id>', methods = ['POST'])
+def editview(id):
+    try:
+        post = Content.query.get_or_404(id)
+        title = request.form['title']
+        content = request.form['pagedown']
+        post.title = title
+        post.content = content
+        db.session.add(post)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was some problem updating the post!!!'
+

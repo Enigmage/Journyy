@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block body %}
-<form action="/submit" method="POST" >
+<form action="/editview/{{change.id}}" method="POST" >
     <div class="form-group container">
         <br>
         {{  form.hidden_tag() }}
