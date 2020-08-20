@@ -8,7 +8,7 @@ content_schema = ContentSchema(many=True)
 @app.route('/')
 def index():
     try:
-        posts = Content.query.all()
+        posts = Content.query.filter_by(user_id=1).order_by(Content.id.desc()).all()
         return render_template('index.html', posts = posts )
     except:
         return 'Data could not be queried !!'
