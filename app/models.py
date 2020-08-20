@@ -1,4 +1,5 @@
 from app import db, ma
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 
@@ -8,6 +9,13 @@ class User(db.Model):
     email = db.Column(db.String(200), unique = True)
     passwd = db.Column(db.String(200))
     posts = db.relationship('Content', backref='author', lazy='dynamic')
+
+    def set_passwd(self, passwd):
+        self.passwd =  generate_password_hash(passwd)
+    
+    def check_passwd(self, passwd):
+        return check_password_hash(self.passwd,passwd)
+
 
     def __repr__(self):
         return f"Username:{self.username}"
