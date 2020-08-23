@@ -12,7 +12,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 ma = Marshmallow(app) # Serializer
-#login_manager = LoginManager(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 csrf = CSRFProtect(app)
 mde = SimpleMDE(app)
 md = Markdown(app)

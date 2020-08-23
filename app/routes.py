@@ -1,4 +1,5 @@
 from flask import render_template, request, jsonify, redirect
+from flask_login import current_user, login_user
 from app import app, db
 from app.forms import markdownform
 from app.models import Content, ContentSchema 
@@ -90,4 +91,21 @@ def editview(id):
         return redirect('/')
     except:
         return 'There was some problem updating the post!!!'
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if current_user.is_authenticated:
+        return redirect('/')
+    if(request.method == 'POST'):
+        username = request.json['username']
+        password = request.json['password']
+        user_check = User.query.filter_by(username=username).first()
+        if user_check is None or not user_check.check_passwd(password):
+            return 'Invalid credentials'
+        login_user(user_check)
+        return 'Successfully Logged in'
+    return 'Login Form'
+
+
+
 
