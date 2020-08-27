@@ -15,6 +15,7 @@ flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 flask-simplemde = "*"
 flask-login = "*"
+email-validator = "*"
 
 [requires]
 python_version = "3.8"
