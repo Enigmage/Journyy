@@ -1,8 +1,8 @@
-from flask import render_template, request, jsonify, redirect
-from flask_login import current_user, login_user, login_required
+from flask import render_template, request, jsonify, redirect, flash
+from flask_login import current_user, login_user, login_required, logout_user
 from app import app, db
-from app.forms import markdownform, LoginForm
-from app.models import Content, ContentSchema 
+from app.forms import markdownform, LoginForm, SignUpForm
+from app.models import Content, User, ContentSchema 
 
 content_schema = ContentSchema(many=True)
 
@@ -16,7 +16,7 @@ def index():
         return 'Data could not be queried !!'
 
 
-@app.route('/post')
+@app.route('/post', methods=['POST', 'GET'])
 @login_required
 def post():
     form = markdownform()
@@ -24,7 +24,7 @@ def post():
         try:
             title = request.form['title']
             content = request.form['pagedown']
-            sub  = Content(title = title, content = content)
+            sub  = Content(title = title, content = content, author=current_user)
             db.session.add(sub)
             db.session.commit()
             return redirect('/')
@@ -34,23 +34,23 @@ def post():
     return render_template('post.html', form=form)
 
 #---------------------------------API TEST-------------------------------------
-@app.route('/test_send', methods = ['GET', 'POST'])
-def test_send():
-    title = request.json['title']
-    content = request.json['content']
-    try:
-        add_this = Content(title = title, content = content )
-        db.session.add(add_this)
-        db.session.commit()
-        return 'Success!'
-    except:
-        return 'There was some problem!!'
-
-@app.route('/test_fetch')
-def test_fetch():
-    x = Content.query.all()
-    y = content_schema.dump(x)
-    return jsonify(y)
+#@app.route('/test_send', methods = ['GET', 'POST'])
+#def test_send():
+#    title = request.json['title']
+#    content = request.json['content']
+#    try:
+#        add_this = Content(title = title, content = content )
+#        db.session.add(add_this)
+#        db.session.commit()
+#        return 'Success!'
+#    except:
+#        return 'There was some problem!!'
+#
+#@app.route('/test_fetch')
+#def test_fetch():
+#    x = Content.query.all()
+#    y = content_schema.dump(x)
+#    return jsonify(y)
 #------------------------------------------------------------------------------
 
 
@@ -93,6 +93,19 @@ def edit(id):
     except:
         return 'Post cannot be fetched for editing'
 
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
+    if current_user.is_authenticated:
+        return redirect('/')
+    form = SignUpForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_passwd(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/')
+    return render_template('signup.html', form = form)
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -101,8 +114,14 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         prob_user = User.query.filter_by(username=form.username.data).first()
-        if prob_user is None or prob_user.check_passwd(form.username.data) is False:
+        if prob_user is None or not prob_user.check_passwd(form.password.data):
             flash('Invalid login')
-            return redirect('/login')
-        
+            return 'Cant log ya in'
+        login_user(prob_user, remember=form.remember_me.data)
+        return redirect('/')
     return render_template('login.html', form = form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/login')
