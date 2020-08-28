@@ -10,7 +10,7 @@ content_schema = ContentSchema(many=True)
 @login_required
 def index():
     try:
-        posts = Content.query.filter_by(user_id=1).order_by(Content.id.desc()).all()
+        posts = Content.query.filter_by(user_id=current_user.id).order_by(Content.id.desc()).all()
         return render_template('index.html', posts = posts )
     except:
         return 'Data could not be queried !!'
@@ -55,6 +55,7 @@ def test_fetch():
 
 
 @app.route('/read/<int:id>')
+@login_required 
 def read(id):
     try:
         read_post = Content.query.get_or_404(id)
@@ -63,6 +64,7 @@ def read(id):
         return 'Post cannot be fetched'
 
 @app.route('/delete/<int:id>')
+@login_required 
 def delete(id):
     try:
         delete_this = Content.query.get_or_404(id)
@@ -73,6 +75,7 @@ def delete(id):
         return 'Post cannot be deleted'
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     try:
         form = markdownform()
@@ -96,4 +99,10 @@ def login():
     if current_user.is_authenticated:
         return redirect('/')
     form = LoginForm()
+    if form.validate_on_submit():
+        prob_user = User.query.filter_by(username=form.username.data).first()
+        if prob_user is None or prob_user.check_passwd(form.username.data) is False:
+            flash('Invalid login')
+            return redirect('/login')
+        
     return render_template('login.html', form = form)

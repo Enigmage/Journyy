@@ -14,7 +14,14 @@
 </head>
 <body>
     <div class="container">
-        
+        <form action="/login" method="POST">
+            <div class="form-group">
+                {{form.username}}
+                {{form.password}}
+                {{form.remember_me}}
+                {{form.submit}}
+            </div>            
+        </form>             
     </div>
 
     <!--Bootsrap JS-->
