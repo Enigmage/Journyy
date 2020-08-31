@@ -5,9 +5,7 @@
 <br>
 <br>
 <div class="container">
-    {% filter markdown %}
-        {{disp.content}}
-    {% endfilter %}
+    <p>       {{disp.content | safe}}   </p>
 </div>
 {% endblock %}
 

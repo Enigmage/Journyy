@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-
 {% block body %}
 <br>
 <br>
 <div class="container">
+    {% if posts %}
     {% for post in posts %}
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.timestamp}}</p>
+            <p class="card-text">{{ moment(post.timestamp).format('LLLL') }}</p>
             <a class="btn btn-primary" href="/read/{{post.id}}">Read</a>
             <a class="btn btn-danger" href="/delete/{{post.id}}">Delete</a>
             <a class="btn btn-info" href="/edit/{{post.id}}">Edit</a>
@@ -16,6 +16,9 @@
     </div>
     <br>
     {% endfor %}
+    {% else %}
+        <p>Nothing here yet !!</p>
+    {% endif %}
 </div>
 {% endblock %}
 

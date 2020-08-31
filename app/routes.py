@@ -1,8 +1,10 @@
 from flask import render_template, request, jsonify, redirect, flash
 from flask_login import current_user, login_user, login_required, logout_user
-from app import app, db
+from app import app, db, moment
 from app.forms import markdownform, LoginForm, SignUpForm
 from app.models import Content, User, ContentSchema 
+import markdown 
+import markdown.extensions.fenced_code 
 
 content_schema = ContentSchema(many=True)
 
@@ -59,6 +61,7 @@ def post():
 def read(id):
     try:
         read_post = Content.query.get_or_404(id)
+        read_post.content = markdown.markdown(read_post.content, extensions=["fenced_code"])
         return render_template('read.html', disp = read_post)
     except:
         return 'Post cannot be fetched'

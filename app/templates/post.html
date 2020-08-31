@@ -12,10 +12,10 @@
         <br>
         {{  form.hidden_tag() }}
         <label for="title">Title:</label>
-        <textarea id="title" name="title" cols="30" rows="1" placeholder="Enter a short descriptive title, max 80 charachters!" class="md-textarea form-control"></textarea>
+        <textarea id="title" name="title" cols="30" rows="1" placeholder="Enter a short descriptive title, max 80 charachters!" class="md-textarea form-control" required></textarea>
         <br>
         <label for="pagedown">Post:</label>
-        <textarea id="pagedown" name="pagedown" cols="30" rows="100"class="form-control" placeholder="Write your post here"></textarea>
+        <textarea id="pagedown" name="pagedown" cols="30" rows="100"class="form-control" placeholder="Write your post here" ></textarea>
         {{ simplemde.load_id("pagedown") }}
         {{ form.submit }}
     </div>

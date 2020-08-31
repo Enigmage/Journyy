@@ -16,6 +16,8 @@ marshmallow-sqlalchemy = "*"
 flask-simplemde = "*"
 flask-login = "*"
 email-validator = "*"
+markdown = "*"
+flask-moment = "*"
 
 [requires]
 python_version = "3.8"
