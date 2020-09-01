@@ -1,14 +1,16 @@
-from flask import render_template, request, jsonify, redirect, flash
+from flask import render_template, request, jsonify, redirect, flash, url_for
 from flask_login import current_user, login_user, login_required, logout_user
 from app import app, db, moment
 from app.forms import markdownform, LoginForm, SignUpForm
-from app.models import Content, User, ContentSchema 
-import markdown 
-import markdown.extensions.fenced_code 
+from app.models import Content, User, ContentSchema
+from werkzeug.urls import url_parse
+import markdown
+import markdown.extensions.fenced_code
 
-content_schema = ContentSchema(many=True)
+#content_schema = ContentSchema(many=True)
 
 @app.route('/')
+@app.route('/index')
 @login_required
 def index():
     try:
@@ -90,7 +92,7 @@ def edit(id):
             post.content = content
             db.session.add(post)
             db.session.commit()
-            return redirect('/')
+            return redirect(url_for('index'))
         change = Content.query.get_or_404(id)
         return render_template('change.html', change = change, form = form)
     except:
@@ -99,32 +101,43 @@ def edit(id):
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if current_user.is_authenticated:
-        return redirect('/')
+        return redirect(url_for('index'))
     form = SignUpForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_passwd(form.password.data)
         db.session.add(user)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for('index'))
     return render_template('signup.html', form = form)
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect('/')
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         prob_user = User.query.filter_by(username=form.username.data).first()
         if prob_user is None or not prob_user.check_passwd(form.password.data):
-            flash('Invalid login')
-            return 'Cant log ya in'
+            flash('Invalid username or password')
+            return redirect('/login')
         login_user(prob_user, remember=form.remember_me.data)
-        return redirect('/')
+        next_page = request.args.get('next')
+        # url parse checks if path provided is relative for security reasons.
+        # if there is no next page in endpoint, next page becomes index
+        # Is not working, its just included for best practise.
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
     return render_template('login.html', form = form)
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect('/login')
+
+@app.route('/user')
+@login_required
+def user():
+    return render_template('profile.html')
