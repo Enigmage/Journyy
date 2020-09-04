@@ -16,6 +16,8 @@ Journal keeping web app with SimpleMDE(markdown editor) for composing journals, 
 
 ![short](gitimg/form.png)
 
+- Live preview Markdown
+
 ![live](gitimg/live.png)
 
 ## Upcoming Features
