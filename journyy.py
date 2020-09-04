@@ -5,6 +5,5 @@ from app.models import User, Content
 def make_context():
     return {'db':db, 'User':User, 'Content':Content}
 
-
 if __name__=='__main__':
     app.run(debug=True)

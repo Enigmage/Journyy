@@ -11,7 +11,7 @@
 
 <body>
     <div class="login-form">
-        <form action="/login" method="POST" class="form-horizontal">
+        <form action="/login" method="POST" class="form-horizontal" novalidate>
             <div class="row">
                 <div class="col-8 offset-4">
                     <h2>Log In</h2>
@@ -22,20 +22,24 @@
                 <label class="col-form-label col-4">Username</label>
                 <div class="col-8">
                     {{ form.username(size=32) }}
+                    {% for errors in form.username.errors %}
+                    <span style="color:red">Field is required</span>
+                    {% endfor %}
                 </div>        	
             </div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="form-group row">
-                        <div class="col-8"><span style="color:red">{{messages[0]}}</span></div>
-                    </div>
-                {% endif %}
-            {% endwith %}
 
             <div class="form-group row">
                 <label class="col-form-label col-4">Password</label>
                 <div class="col-8">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                        <span style="color:red">Invalid username or password</span>
+                        {% endif %}
+                    {% endwith %}
                     {{ form.password(size=32) }}
+                    {% for errors in form.password.errors %}
+                    <span style="color:red">Field is required</span>
+                    {% endfor %}
                 </div>        	
             </div>
             <div class="form-group row">

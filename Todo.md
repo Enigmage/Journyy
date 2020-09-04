@@ -4,7 +4,8 @@
 * [x] Render submitted content on the Dashboard.
 * [x] Scale for multiple Users
 * [ ] Dockerize
-* [ ] Solve Login issue.
+* [ ] Deploy container to Heroku
+* [x] Solve Login issue.
 
 
 ### Post deployment

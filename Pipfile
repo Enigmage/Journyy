@@ -20,6 +20,7 @@ markdown = "*"
 flask-moment = "*"
 flask-migrate = "*"
 flask-admin = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

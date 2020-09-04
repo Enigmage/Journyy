@@ -120,7 +120,7 @@ def login():
     if form.validate_on_submit():
         prob_user = User.query.filter_by(username=form.username.data).first()
         if prob_user is None or not prob_user.check_passwd(form.password.data):
-            flash('Invalid username or password')
+            flash(u'Invalid username or password', 'error')
             return redirect('/login')
         login_user(prob_user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -137,7 +137,3 @@ def logout():
     logout_user()
     return redirect('/login')
 
-@app.route('/user')
-@login_required
-def user():
-    return render_template('profile.html')
