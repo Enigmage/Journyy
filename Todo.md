@@ -3,8 +3,7 @@
 * [x] Test content model
 * [x] Render submitted content on the Dashboard.
 * [x] Scale for multiple Users
-* [ ] Dockerize
-* [ ] Deploy container to Heroku
+* [x] Deploy  to Heroku
 * [x] Solve Login issue.
 
 
@@ -14,3 +13,5 @@
 - [ ] Email Support
 - [ ] Profile Page
 - [ ] Mood tracking and statistics.
+- [ ] Dockerize
+- [ ] Solve migration issue on Heroku
