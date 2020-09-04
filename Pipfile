@@ -19,6 +19,7 @@ email-validator = "*"
 markdown = "*"
 flask-moment = "*"
 flask-migrate = "*"
+flask-admin = "*"
 
 [requires]
 python_version = "3.8"

@@ -3,6 +3,8 @@
 * [x] Test content model
 * [x] Render submitted content on the Dashboard.
 * [ ] Refactor UI
-* [ ] Scale for multiple Users
-* [ ] Rewrite UI in React
+* [x] Scale for multiple Users
+* [ ] Add profile page
+* [ ] Add mood tracking features.
+
 
