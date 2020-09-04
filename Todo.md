@@ -2,9 +2,14 @@
 
 * [x] Test content model
 * [x] Render submitted content on the Dashboard.
-* [ ] Refactor UI
 * [x] Scale for multiple Users
-* [ ] Add profile page
-* [ ] Add mood tracking features.
+* [ ] Dockerize
+* [ ] Solve Login issue.
 
 
+### Post deployment
+- [ ] Ui refactoring
+- [ ] OAuth
+- [ ] Email Support
+- [ ] Profile Page
+- [ ] Mood tracking and statistics.
