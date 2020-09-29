@@ -24,7 +24,7 @@
                     <a class="nav-item nav-link" href="{{url_for('index')}}">Dashboard</a>
                     <a class="nav-item nav-link" href="{{url_for('post')}}">Post</a>
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Hey {{current_user.username}} !!</a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{url_for('profile')}}">Hey {{current_user.username}} !!</a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="#">View Profile</a>
                              <div class="dropdown-divider"></div>

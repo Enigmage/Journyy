@@ -137,3 +137,7 @@ def logout():
     logout_user()
     return redirect('/login')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+

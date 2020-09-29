@@ -1,9 +1,16 @@
 
 {% extends 'base.html' %}
 {% block body %}
-    
-<h3>{{current_user.username}}</h3>
-
+    <div class="profile">
+        <div class="media">
+            <img class="rounded-circle account-img" src="" alt="dp">
+            <div class="media-body">
+                <h2>{{current_user.username}}</h2>
+                <p>{{current_user.email}}</p>
+            </div>
+        </div>
+        <div class="stats"></div>
+    </div>
 {% endblock %}
 
 
