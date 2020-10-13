@@ -1,4 +1,24 @@
 {% extends 'base.html' %}
+{% block head %}
+<style>
+.card {
+    background:#03e3fc;
+}
+.turn-green:hover {
+    background:lightgreen;
+}
+    .turn-red:hover {
+        background:red;
+    }
+    .turn-yellow:hover {
+        background:yellow;
+    }
+    .card-header {
+        background:#282828;
+        color:whitesmoke;
+    }
+</style>
+{% endblock %}
 {% block body %}
 <br>
 <br>
@@ -6,12 +26,18 @@
     {% if posts %}
     {% for post in posts %}
     <div class="card">
-        <div class="card-body">
+        <div class="card-header text-center">
             <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{ moment(post.timestamp).format('LLLL') }}</p>
-            <a class="btn btn-primary" href="/read/{{post.id}}">Read</a>
-            <a class="btn btn-danger" href="/delete/{{post.id}}">Delete</a>
-            <a class="btn btn-info" href="/edit/{{post.id}}">Edit</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <p class="card-text col-9">Date Posted:  {{ moment(post.timestamp).format('LLLL') }}</p>
+                <div class="col-3">
+                    <a class="btn btn-light turn-green" href="/read/{{post.id}}">Read</a>
+                    <a class="btn btn-light turn-red" href="/delete/{{post.id}}">Delete</a>
+                    <a class="btn btn-light turn-yellow" href="/edit/{{post.id}}">Edit</a>
+                </div>
+            </div>
         </div>
     </div>
     <br>

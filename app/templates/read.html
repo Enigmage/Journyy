@@ -1,10 +1,16 @@
 
 {% extends 'base.html' %}
-
+{% block head %}
+<style>
+    .container {
+        background:#e6ffff;
+    }
+</style>
+{% endblock %}
 {% block body %}
 <br>
 <br>
-<div class="container">
+<div class="container py-3 px-3">
     <p>       {{disp.content | safe}}   </p>
 </div>
 {% endblock %}

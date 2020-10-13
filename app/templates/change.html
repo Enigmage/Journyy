@@ -5,9 +5,15 @@
 {% block head %}
 {{ simplemde.css }}
 {{ simplemde.js  }}
+<style>
+    .wrap-from {
+        background:#03e3fc;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
+<div class="wrap-from container px-3 py-3 mt-2">
 <form action="/edit/{{change.id}}" method="POST" >
     <div class="form-group container">
         <br>
@@ -21,6 +27,7 @@
         {{ form.submit }}
     </div>
 </form>
+</div>
 {% endblock %}
 
 
