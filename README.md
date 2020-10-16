@@ -12,7 +12,7 @@ Journal keeping web app with SimpleMDE(markdown editor) for composing journals, 
 
 ### Editor
 
-- SimpleMDE for writing your journals. Why? Because a normal editor would have been boring XD
+- Markdown editor for editing.
 
 ![short](gitimg/form.png)
 
@@ -26,4 +26,4 @@ Journal keeping web app with SimpleMDE(markdown editor) for composing journals, 
 * Email Support (for password reset and daily reminder)
 * Personalized profile page
 * Mood Tracking and frequency charts to track activity
-* Better UI (really need this one !)
+
