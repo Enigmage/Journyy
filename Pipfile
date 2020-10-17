@@ -23,6 +23,9 @@ flask-admin = "*"
 gunicorn = "*"
 psycopg2 = "*"
 psycopg2-binary = "*"
+requests = "*"
+oauthlib = "*"
+pyopenssl = "*"
 
 [requires]
 python_version = "3.8"

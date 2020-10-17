@@ -132,6 +132,11 @@ def login():
         return redirect(next_page)
     return render_template('login.html', form = form)
 
+# OAuth Google.
+@app.route('/login_google', methods=['POST', 'GET'])
+def login_google():
+    pass
+
 @app.route('/logout')
 def logout():
     logout_user()
