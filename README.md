@@ -11,7 +11,7 @@ Journal keeping web app with embedded Markdown editor for composing journals, wr
 
 ### Editor
 
-- Markdown editor for editing.
+- Markdown editor for writing.
 
 ![short](gitimg/form.png)
 
