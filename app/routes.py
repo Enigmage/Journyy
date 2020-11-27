@@ -37,27 +37,6 @@ def post():
 
     return render_template('post.html', form=form)
 
-#---------------------------------API TEST-------------------------------------
-#@app.route('/test_send', methods = ['GET', 'POST'])
-#def test_send():
-#    title = request.json['title']
-#    content = request.json['content']
-#    try:
-#        add_this = Content(title = title, content = content )
-#        db.session.add(add_this)
-#        db.session.commit()
-#        return 'Success!'
-#    except:
-#        return 'There was some problem!!'
-#
-#@app.route('/test_fetch')
-#def test_fetch():
-#    x = Content.query.all()
-#    y = content_schema.dump(x)
-#    return jsonify(y)
-#------------------------------------------------------------------------------
-
-
 @app.route('/read/<int:id>')
 @login_required 
 def read(id):
@@ -146,3 +125,4 @@ def logout():
 def profile():
     return render_template('profile.html')
 
+    

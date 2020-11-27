@@ -1,6 +1,17 @@
 
 {% extends 'base.html' %}
+{% block head %}
+
+<style>
+.profile {
+    color:whitesmoke;
+}
+</style>
+
+{% endblock %}
+
 {% block body %}
+{{super()}}
     <div class="profile">
         <div class="media">
             <img class="rounded-circle account-img" src="" alt="dp">

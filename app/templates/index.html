@@ -25,10 +25,16 @@
 <br>
 <div class="container">
     {% if posts %}
+    <h4 style="color:whitesmoke">All Pages</h3>
+    <br>
     {% for post in posts %}
     <div class="card">
-        <div class="card-header text-center">
-            <h5 class="card-title">{{post.title}}</h5>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-10">
+                    <h5 class="card-title">{{post.title}}</h5>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -45,8 +51,7 @@
     {% endfor %}
     {% else %}
     <div class="container text-center">
-        <p><span style="color:grey">Nothing here yet !!</span></p>
-        <p><span style="color:grey">Click on "Post" in navbar to write your first journal !</span></p>
+        <p><span style="color:white">Nothing here yet !!</span></p>
     </div>
     {% endif %}
 </div>

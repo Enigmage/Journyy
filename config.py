@@ -12,8 +12,6 @@ class Config:
     GOOGLE_CLIENT_ID=os.environ.get('GOOGLE_CLIENT_ID') or None
     GOOGLE_CLIENT_SECRET=os.environ.get('GOOGLE_CLIENT_SECRET') or None
     GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configuration"
-    SIMPLEMDE_JS_IIFE = True
-    SIMPLEMDE_USE_CDN = True
-    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+   # LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 
 

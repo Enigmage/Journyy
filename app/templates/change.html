@@ -3,31 +3,34 @@
 {% extends 'base.html' %}
 
 {% block head %}
-{{ simplemde.css }}
-{{ simplemde.js  }}
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 <style>
     .wrap-from {
-        background:#03e3fc;
+        background:#e6ffff;
     }
 </style>
 {% endblock %}
 
 {% block body %}
+{{ super() }}
 <div class="wrap-from container px-3 py-3 mt-2">
 <form action="/edit/{{change.id}}" method="POST" >
     <div class="form-group container">
         <br>
         {{  form.hidden_tag() }}
         <label for="title">Title:</label>
-        <textarea id="title" name="title" cols="30" rows="1" placeholder="Enter a short descriptive title, max 80 charachters!" class="md-textarea form-control">{{change.title}}</textarea>
+        <textarea id="title" name="title" cols="30" rows="1" placeholder="Enter a short descriptive title" class="md-textarea form-control">{{change.title}}</textarea>
         <br>
         <label for="pagedown">Post:</label>
         <textarea id="pagedown" name="pagedown" cols="30" rows="100"class="form-control" placeholder="Write your post here">{{change.content}}</textarea>
-        {{ simplemde.load_id("pagedown") }}
-        {{ form.submit }}
+        <div class="text-center">{{ form.submit }}</div>
     </div>
 </form>
 </div>
+<script>
+var easyMDE = new EasyMDE({element: document.getElementById('pagedown')});
+</script>
 {% endblock %}
 
 

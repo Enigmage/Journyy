@@ -1,12 +1,11 @@
 # Journyy
 
-Journal keeping web app with SimpleMDE(markdown editor) for composing journals, written in python(flask).
+Journal keeping web app with embedded Markdown editor for composing journals, written in python(flask).
 
 ### Dashboard
 
 - Simple Dashboard to keep all your journals in one place. Time of each post is displayed to help keep tracking. This application uses MomentJS to map UTC to localtime, so no matter if you are in a different timezone that the server, you will always be shown your appropriate local time.
 
-![empty](gitimg/emptydash.png)
 
 ![dash](gitimg/dash.png)
 
