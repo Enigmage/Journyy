@@ -1,23 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-<style>
-.card {
-    background:#03e3fc;
-}
-.turn-green:hover {
-    background:lightgreen;
-}
-    .turn-red:hover {
-        background:red;
-    }
-    .turn-yellow:hover {
-        background:yellow;
-    }
-    .card-header {
-        background:#282828;
-        color:whitesmoke;
-    }
-</style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" type="text/css" media="screen" title="no title" charset="utf-8">
 {% endblock %}
 {% block body %}
 {{ super() }}
@@ -56,5 +39,6 @@
     {% endif %}
 </div>
 {% endblock %}
+
 
 

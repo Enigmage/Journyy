@@ -8,29 +8,7 @@
         <!--Bootstrap-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Almendra|Cormorant SC|Alegreya|BioRhyme' rel='stylesheet'>
-
-        <style>
-            body {
-                background:#0C0032;
-                font-family:'Alegreya';
-            }
-            .navbar {
-                background: #240090;
-                color: whitesmoke;
-                font-family: BioRhyme;
-            }
-            .nav-link {
-                color: white;
-            }
-            .nav-link:hover {
-                color: lightgreen;
-            }
-            .active {
-                background-color: #fff;
-                color: red;
-            }
-        </style>
-
+        <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" type="text/css" media="screen" title="no title" charset="utf-8">
         {% block head %}{% endblock %}
     </head>
     <body>
@@ -51,6 +29,7 @@
                 </div>
             </div>
         </nav>
+
         {% endblock %}    
 
 

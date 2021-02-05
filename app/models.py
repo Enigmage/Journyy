@@ -1,7 +1,10 @@
-from app import db, ma, login_manager
+from app import db, ma, login_manager, app
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask_login import UserMixin
+from time import time
+import jwt
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -9,6 +12,18 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(200), unique = True)
     passwd = db.Column(db.String(200))
     posts = db.relationship('Content', backref='author', lazy='dynamic')
+
+    def generate_reset_password_token(self, expires=900):
+        return jwt.encode({'reset-pass': self.id, 'expiration-time':time()+expires}, 
+                          app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms = ['HS256'])['reset-pass']
+        except:
+            return
+        return User.query.get(id)
 
     def set_passwd(self, passwd):
         self.passwd =  generate_password_hash(passwd)
@@ -34,8 +49,5 @@ class Content(db.Model):
     def __repr__(self):
         return f"Content id {self.id}"
 
-class ContentSchema(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = Content
 
 

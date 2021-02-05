@@ -1,0 +1,17 @@
+.card {
+  background:#03e3fc;
+}
+.turn-green:hover {
+  background:lightgreen;
+}
+.turn-red:hover {
+  background:red;
+}
+.turn-yellow:hover {
+  background:yellow;
+}
+.card-header {
+  background:#282828;
+  color:whitesmoke;
+}
+

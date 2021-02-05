@@ -25,6 +25,8 @@ psycopg2-binary = "*"
 requests = "*"
 oauthlib = "*"
 pyopenssl = "*"
+flask-mail = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.8"

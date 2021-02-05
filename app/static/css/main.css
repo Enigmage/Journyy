@@ -1,0 +1,20 @@
+body {
+  background:#0C0032;
+  font-family:'Alegreya';
+}
+.navbar {
+  background: #240090;
+  color: whitesmoke;
+  font-family: BioRhyme;
+}
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: lightgreen;
+}
+.active {
+  background-color: #fff;
+  color: red;
+}
+
