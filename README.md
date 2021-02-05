@@ -1,6 +1,6 @@
 # Journyy
 
-Journal keeping web app with embedded Markdown editor for composing journals, written in python(flask).
+Journal keeping web app with embedded Markdown editor([EasyMDE](https://github.com/Ionaru/easy-markdown-editor)) for composing journals, written in python(flask).
 
 ### Dashboard
 
