@@ -1,1 +1,1 @@
-web: gunicorn journyy:app
+web: flask db upgrade; gunicorn journyy:app

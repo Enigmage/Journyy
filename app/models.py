@@ -8,6 +8,7 @@ import jwt
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    social_id = db.Column(db.String(128), unique=True)
     username = db.Column(db.String(100), unique = True)
     email = db.Column(db.String(200), unique = True)
     passwd = db.Column(db.String(200))

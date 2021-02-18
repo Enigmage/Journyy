@@ -1,11 +1,14 @@
 from flask import render_template, request, jsonify, redirect, flash, url_for
 from flask_login import current_user, login_user, login_required, logout_user
-from app import app, db, moment
+from app import app, db, moment, client
 from app.forms import markdownform, LoginForm, SignUpForm, PasswordResetRequestForm, ResetPasswordForm
 from app.models import Content, User
 from app.email import send_password_reset_mail
+from app.utils import get_google_endpoints
 from werkzeug.urls import url_parse
 import markdown
+import requests
+import json
 import markdown.extensions.fenced_code
 
 @app.route('/index')
@@ -110,10 +113,6 @@ def login():
         return redirect(next_page)
     return render_template('login.html', form = form)
 
-# OAuth Google.
-@app.route('/login_google', methods=['POST', 'GET'])
-def login_google():
-    pass
 
 @app.route('/logout')
 def logout():
@@ -150,6 +149,48 @@ def reset_password(token):
     return render_template('reset_password.html', form = form, token=token)
 
 
+@app.route('/login_google', methods = ['POST', 'GET'])
+def login_google():
+    google_endpoints = get_google_endpoints()
+    auth_endpoint = google_endpoints['authorization_endpoint']
+    request_uri = client.prepare_request_uri( auth_endpoint, 
+                                             redirect_uri = f"{request.base_url}/callback",
+                                             scope = ["openid", "email", "profile"]
+                                             )
+    return redirect(request_uri)
 
 
-    
+@app.route('/login_google/callback', methods = ['POST', 'GET'])
+def login_google_callback():
+    # Get auth code sent back by google.
+    code = request.args.get("code")
+    google_endpoints= get_google_endpoints()
+    token_endpoint = google_endpoints['token_endpoint']
+    # Construct and send token request.
+    token_url, header, body = client.prepare_token_request( token_endpoint, 
+                                                           authorization_response=request.url,
+                                                           redirect_url = request.base_url,
+                                                           code = code
+                                                           )
+    token_response = requests.post(token_url, headers=header, data=body, auth=(app.config['GOOGLE_CLIENT_ID'],
+                                                                               app.config['GOOGLE_CLIENT_SECRET']),
+                                   )
+    client.parse_request_body_response(json.dumps(token_response.json()))
+    userinfo_endpoint = google_endpoints['userinfo_endpoint']
+    uri, header, body  = client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=header, data=body)
+    if userinfo_response.json().get("email_verified"):
+        uid = userinfo_response.json()["sub"]
+        user_email = userinfo_response.json()["email"]
+        user_name = userinfo_response.json()["given_name"]
+        user = User.query.filter_by(social_id = uid).first()
+        if not user:
+            add_user = User(social_id = uid, username=user_name, email=user_email)
+            db.session.add(add_user)
+            db.session.commit()
+        login_user(user)
+        return redirect(url_for('index'))
+    else:
+        return "The user cannot be verified by google !!"
+
+

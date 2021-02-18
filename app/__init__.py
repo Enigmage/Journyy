@@ -7,7 +7,7 @@ from flask_login import LoginManager
 from flask_moment import Moment
 from flask_migrate import Migrate
 from config import Config
-#from oauthlib.oauth2 import WebApplicationClient
+from oauthlib.oauth2 import WebApplicationClient
 from flask_mail import Mail
 
 
@@ -23,7 +23,7 @@ csrf = CSRFProtect(app)
 moment = Moment(app)
 md = Markdown(app)
 mail = Mail(app)
-#client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
+client = WebApplicationClient(app.config['GOOGLE_CLIENT_ID'])
 
 from app import routes, models
 

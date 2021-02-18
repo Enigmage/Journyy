@@ -1,8 +1,8 @@
 
 - [ ] Email Services (Mon Oct, 2020)
-    - [ ] OAuth (Mon Oct, 2020)
-    - [ ] Password Reset (Mon Oct, 2020)
     - [ ] Daily Reminder (Mon Oct, 2020)
+    - [X] OAuth (Mon Oct, 2020)
+    - [X] Password Reset (Mon Oct, 2020)
 - [ ] Improve Security. (Mon Oct, 2020)
 - [X] Improve UI (Mon Oct, 2020)
     - [X] change heirarchy of templates 
