@@ -19,10 +19,6 @@ Journal keeping web app with embedded Markdown editor([EasyMDE](https://github.c
 
 ![live](gitimg/live.png)
 
-## Upcoming Features
 
-* OAuth (to make authentication easier)
-* Email Support (for password reset and daily reminder)
-* Personalized profile page
-* Mood Tracking and frequency charts to track activity
+
 
