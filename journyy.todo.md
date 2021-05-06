@@ -9,4 +9,6 @@
     - [X] Apply colorscheme (Mon Oct, 2020)
     - [X] Design before coding (Mon Oct, 2020)
 - [X] Change Markdown editor to EasyMDE
+- [ ] Login Page Styling.
+- [ ] Colorscheme improvements(optional)
 
