@@ -3,4 +3,5 @@
 *.db
 *.backup
 *.todo.md
+*/__pycache__/
 
