@@ -2,4 +2,5 @@
 .env
 *.db
 *.backup
+*.todo.md
 
