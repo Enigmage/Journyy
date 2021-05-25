@@ -1,6 +1,6 @@
 # Journyy
 
-A Journal keeping web application written in Python with complete CRUD functionality, a fully functional authentication system, OAuth 2.0 with google support, also features like password-reset using JWTs.
+A Journal keeping web application written in Python (Flask) with complete CRUD functionality, a fully functional authentication system, OAuth 2.0 with google support, also features like password-reset using JWTs.
 
 ### Dashboard
 
