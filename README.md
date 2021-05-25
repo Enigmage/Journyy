@@ -1,6 +1,6 @@
 # Journyy
 
-Journal keeping web app with embedded Markdown editor([EasyMDE](https://github.com/Ionaru/easy-markdown-editor)) for composing journals, written in python(flask).
+A Journal keeping web application written in Python with complete CRUD functionality, a fully functional authentication system, OAuth 2.0 with google support, also features like password-reset using JWTs.
 
 ### Dashboard
 
